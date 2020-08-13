@@ -1,0 +1,31 @@
+<div>
+    <h3>Datos!</h3>
+    <div>
+        <label for="anchoPliego">anchoPliego</label>
+        <input type="number" id="anchoPliego" [(ngModel)]="anchoPliego">
+    </div>
+    <div>
+        <label for="largoPliego">largoPliego</label>
+        <input type="number" id="largoPliego" [(ngModel)]="largoPliego">
+    </div>
+    <div>
+        <label for="anchoCorte">anchoCorte</label>
+        <input type="number" id="anchoCorte" [(ngModel)]="anchoCorte">
+    </div>
+    <div>
+        <label for="largoCorte">largoCorte</label>
+        <input type="number" id="largoCorte" [(ngModel)]="largoCorte">
+    </div>
+    <button (click)="clic()">Calcular</button>
+</div>
+
+<div>
+    <h3>Resultados!</h3>
+    <div>ejemplaresPorPliego = {{ejemplaresPorPliego}}</div>
+    <div>horizontales = {{horizontales}}</div>
+    <div>verticales = {{verticales}}</div>
+    <div>totalPliegos = {{totalPliegos}}</div>
+    <div>totalEjemplares = {{totalEjemplares}}</div>
+    <div>porcentajeUtilizado = {{porcentajeUtilizado}}</div>
+    <div>porcentajeSinUtilizar = {{porcentajeSinUtilizar}}</div>
+</div>

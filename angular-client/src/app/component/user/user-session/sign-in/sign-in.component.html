@@ -1,0 +1,57 @@
+<!--
+<div class="container"></div>
+
+<form (ngSubmit)="signIn()">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+    </div>
+    <button class="button" type="submit">Sign in</button>
+</form>
+-->
+<div class="container">
+    <div>
+      <h1>Sign in</h1>
+      <form (ngSubmit)="signIn()" #signinForm="ngForm">
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username"
+                 required
+                 name="username"
+                 [(ngModel)]="form.username"
+                 #username="ngModel">
+          <div [hidden]="username.valid || username.pristine"
+               class="alert alert-danger">
+            Username is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password"
+                 [(ngModel)]="form.password" name="password">
+        </div>
+  
+        <button type="submit" class="btn btn-success" [disabled]="!signinForm.form.valid">
+            Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+
+<!--
+<div class="container">
+    <div>
+        Username: <input type="text" name="username" [(ngModel)]="signinForm.username">
+        Passowrd: <input type="password" name="password" [(ngModel)]="signinForm.password">
+    </div>
+    <button (click)=signIn() class="btn btn-success">
+        Sign In
+    </button>
+</div>
+-->

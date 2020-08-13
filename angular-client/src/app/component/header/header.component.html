@@ -1,0 +1,14 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div><a href="https://sackprom.com/" class="navbar-brand">Sackprom</a></div>
+
+        <ul class="navbar-nav">
+
+            <li><a *ngIf="authService.isUserAuthenticated()" routerLink="/user-list" class="nav-link">User list</a></li>
+            <!--<li><a *ngIf="!authService.isUserAuthenticated()" routerLink="/sign-up" class="nav-link">Sign up</a></li>-->
+            <!--<li><a *ngIf="!authService.isUserAuthenticated()" routerLink="/sign-in" class="nav-link">Sign in</a></li>-->
+            <li><a *ngIf="authService.isUserAuthenticated()" routerLink="/sign-out" class="nav-link">Sign out</a></li>
+
+        </ul>
+    </nav>
+</header>

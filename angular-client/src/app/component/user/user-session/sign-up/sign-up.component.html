@@ -1,0 +1,26 @@
+<div class="col-md-6">
+    <h2 class="text-center">Sign Up</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="name" [(ngModel)]="signupForm.name" placeholder="Name" name="name" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="username" [(ngModel)]="signupForm.username" placeholder="Username" name="username" class="form-control" id="username">
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" [(ngModel)]="signupForm.email" placeholder="Email" name="email" class="form-control" id="email">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" [(ngModel)]="signupForm.password" placeholder="Password" name="password" class="form-control" id="password">
+        </div>
+
+        <button class="btn btn-success" (click)="signUp()">Sign Up</button>
+    </form>
+</div>
