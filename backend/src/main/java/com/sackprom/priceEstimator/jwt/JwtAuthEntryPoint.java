@@ -1,4 +1,4 @@
-package com.sackprom.priceEstimator.config.jwt;
+package com.sackprom.priceEstimator.jwt;
 
 import java.io.IOException;
 

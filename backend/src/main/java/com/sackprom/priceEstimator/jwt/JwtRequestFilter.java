@@ -1,4 +1,4 @@
-package com.sackprom.priceEstimator.config.jwt;
+package com.sackprom.priceEstimator.jwt;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.sackprom.priceEstimator.services.security.JwtUserDetailsService;
+import com.sackprom.priceEstimator.services.UserDetailsServiceImpl;
 
 /*
  * Executes once per request.
@@ -27,7 +27,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
     private JwtTokenUtil tokenProvider;
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
     
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtRequestFilter.class);
     

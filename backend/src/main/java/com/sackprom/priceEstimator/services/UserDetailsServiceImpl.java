@@ -1,5 +1,7 @@
-package com.sackprom.priceEstimator.services.security;
+package com.sackprom.priceEstimator.services;
 
+import com.sackprom.priceEstimator.dao.UserDAO;
+import com.sackprom.priceEstimator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,14 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sackprom.priceEstimator.dao.UserDAO;
-import com.sackprom.priceEstimator.model.User;
-
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-    UserDAO userRepository;
+    UserDAO userRepo;
 	
 	/*
 	 * Will find a record from users database tables 
@@ -22,18 +21,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 	 */
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) 
-    		throws UsernameNotFoundException {
-      
-        User user = userRepository
-        		.findByUsername(username)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo
+				.findByUsername(username)
         		.orElseThrow(
         				() -> new UsernameNotFoundException(
         						"User Not Found with -> username or email : "
         						+ username
         		)
         );
- 
-        return UserPrinciple.build(user);
+        return UserDetailsImpl.build(user);
     }
 }

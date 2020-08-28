@@ -1,5 +1,8 @@
 package com.sackprom.priceEstimator.config;
 
+import com.sackprom.priceEstimator.jwt.JwtAuthEntryPoint;
+import com.sackprom.priceEstimator.jwt.JwtRequestFilter;
+import com.sackprom.priceEstimator.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.sackprom.priceEstimator.config.jwt.JwtAuthEntryPoint;
-import com.sackprom.priceEstimator.config.jwt.JwtRequestFilter;
-import com.sackprom.priceEstimator.services.security.JwtUserDetailsService;
- 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -26,7 +25,7 @@ import com.sackprom.priceEstimator.services.security.JwtUserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
-    JwtUserDetailsService userDetailsService;
+    UserDetailsServiceImpl userDetailsService;
  
     @Autowired
     private JwtAuthEntryPoint authEntryPoint;
@@ -37,11 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
  
     @Override
-    public void configure(
-    		AuthenticationManagerBuilder authenticationManagerBuilder
-    ) throws Exception {
-    	
-        authenticationManagerBuilder
+    public void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+        authManagerBuilder
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
@@ -59,10 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	
-    	http.cors().and().csrf().disable().
-        	authorizeRequests()
-        	
+    	http.cors().and().csrf().disable().authorizeRequests()
+
                 .antMatchers(
                 		"/api/auth/**", 
                 		"/", 

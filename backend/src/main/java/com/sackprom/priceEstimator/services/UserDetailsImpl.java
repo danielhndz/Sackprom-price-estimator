@@ -1,16 +1,15 @@
-package com.sackprom.priceEstimator.services.security;
+package com.sackprom.priceEstimator.services;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sackprom.priceEstimator.model.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sackprom.priceEstimator.model.User;
 
 /*
  * UserPrinciple is not used directly by Spring Security for security purposes.
@@ -19,7 +18,7 @@ import com.sackprom.priceEstimator.model.User;
  * (such as email addresses, telephone numbers etc) 
  * to be stored.
  */
-public class UserPrinciple implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
 	/**
 	 * 
@@ -41,7 +40,7 @@ public class UserPrinciple implements UserDetails {
 	 * @param password
 	 * @param authorities
 	 */
-	public UserPrinciple(
+	public UserDetailsImpl(
 			Long id, 
 			String name, String username, String email, 
 			String password,
@@ -63,7 +62,7 @@ public class UserPrinciple implements UserDetails {
 						)
 				).collect(Collectors.toList());
 		
-		return new UserPrinciple(
+		return new UserDetailsImpl(
 				user.getId(), 
 				user.getName(), 
 				user.getUsername(), 
@@ -133,8 +132,7 @@ public class UserPrinciple implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        
-        UserPrinciple user = (UserPrinciple) o;
+        UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
     }
 

@@ -1,4 +1,4 @@
-package com.sackprom.priceEstimator.config.jwt;
+package com.sackprom.priceEstimator.jwt;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.sackprom.priceEstimator.services.security.UserPrinciple;
+import com.sackprom.priceEstimator.services.UserDetailsImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -36,11 +36,9 @@ public class JwtTokenUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
     
     public String generateJwtToken(Authentication authentication) {
-    	 
-        UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
- 
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         return Jwts.builder()
-        		.setSubject((userPrincipal.getUsername()))
+        		.setSubject((user.getUsername()))
         		.setIssuedAt(new Date())
         		.setExpiration(new Date((new Date()).getTime() + jwtExpiration))
         		.signWith(SignatureAlgorithm.HS512, jwtKey)
@@ -62,7 +60,6 @@ public class JwtTokenUtil {
         } catch (IllegalArgumentException e) {
             LOGGER.error("JWT claims string is empty -> Message: {}", e);
         }
-        
         return false;
 	}
 
